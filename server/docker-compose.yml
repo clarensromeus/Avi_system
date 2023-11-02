@@ -1,0 +1,37 @@
+version: '4'
+services:
+# mysql service
+  mysql: 
+    image: mysql:latest
+    ports:
+      - 3306:3306
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=clarens1998
+      - MYSQL_USERNAME=root
+    volumes:
+      - mysql-data:/var/lib/mysql # /var/lib/postgresql for postgresql
+    networks:
+      - avi_net
+# phpmyadmin service
+  phpmyadmin: 
+    image: phpmyadmin
+    ports:
+      - 8080:8080
+    restart: always
+    environment:
+      - PHP_ARBITRARY=1
+    networks:
+      - avi_net
+# volumes and networks
+volumes:
+  mysql-data:
+    driver: local
+networks:
+  avi_net: 
+    driver: bridge
+     
+    
+    
+
+
